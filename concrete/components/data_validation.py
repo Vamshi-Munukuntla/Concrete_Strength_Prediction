@@ -54,16 +54,12 @@ class DataValidation:
                     file_name=train_filename)
 
                 is_train_column_numbers_validated = self.train_data.validate_column_length()
-                print("is_train_column_numbers_validated", is_train_column_numbers_validated)
 
                 is_train_column_name_same = self.train_data.check_column_names()
-                print("is_train_column_name_same", is_train_column_name_same)
 
                 is_train_missing_values_whole_column = self.train_data.missing_values_whole_column()
-                print("is_train_missing_values_whole_column", is_train_missing_values_whole_column)
 
                 self.train_data.replace_null_values_with_null()
-                print("abc", self.train_data.replace_null_values_with_null())
 
                 # Validating the test files
                 logging.info("Validating the test files")
