@@ -8,6 +8,4 @@ DataIngestionConfig = namedtuple("DataIngestionConfig",
                                   "ingested_train_dir",
                                   "ingested_test_dir"])
 
-
-
-
+DataValidationConfig = namedtuple("DataValidationConfig", ["schema_file_path"])
