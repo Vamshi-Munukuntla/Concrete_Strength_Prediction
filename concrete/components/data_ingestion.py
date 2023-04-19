@@ -60,14 +60,16 @@ class DataIngestion:
             today_date = date.today()
             current_year = today_date.year
 
-            us_visa_dataframe = pd.read_csv(concrete_strength_file_path)
+            concrete_dataframe = pd.read_csv(concrete_strength_file_path)
+
+            concrete_dataframe.drop_duplicates(inplace=True)
 
             logging.info(f"Splitting data into train and test")
 
             train_set = None
             test_set = None
 
-            train_set, test_set = train_test_split(us_visa_dataframe, test_size=0.2, random_state=42)
+            train_set, test_set = train_test_split(concrete_dataframe, test_size=0.2, random_state=42)
 
             train_file_path = os.path.join(self.data_ingestion_config.ingested_train_dir,
                                            file_name)

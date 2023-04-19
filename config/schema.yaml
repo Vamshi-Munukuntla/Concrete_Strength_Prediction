@@ -30,4 +30,3 @@ Transformation_columns:
   - Age_in_days
 
 target_column: Concrete_Strength
-
