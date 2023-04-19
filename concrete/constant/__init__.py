@@ -36,7 +36,7 @@ DATA_VALIDATION_CONFIG_KEY = "data_validation_config"
 DATA_VALIDATION_SCHEMA_FILE_NAME_KEY = "schema_file_name"
 DATA_VALIDATION_SCHEMA_DIR_KEY = "schema_dir"
 
-# Data Transformation related variables
+# Data Transformation Related variables
 DATA_TRANSFORMATION_CONFIG_KEY = "data_transformation_config"
 DATA_TRANSFORMATION_ARTIFACT_DIR = "data_transformation"
 DATA_TRANSFORMATION_DIR_NAME_KEY = "transformed_dir"
@@ -51,5 +51,11 @@ DATASET_SCHEMA_COLUMNS_KEY = "ColumnNames"
 NUMERICAL_COLUMN_KEY = "Numerical_columns"
 TRANSFORM_COLUMN_KEY = "Transformation_columns"
 
-
-
+# Model Trainer Related Variable
+MODEL_TRAINER_ARTIFACT_DIR = "model_trainer"
+MODEL_TRAINER_CONFIG_KEY = "model_trainer_config"
+MODEL_TRAINER_TRAINED_MODEL_DIR_KEY = "trained_model_dir"
+MODEL_TRAINER_TRAINED_MODEL_FILE_NAME_KEY = "model_file_name"
+MODEL_TRAINER_BASE_R2_SCORE_KEY = "base_r2_score"
+MODEL_TRAINER_MODEL_CONFIG_DIR_KEY = "model_config_dir"
+MODEL_TRAINER_MODEL_CONFIG_FILE_NAME_KEY = "model_config_file_name"
