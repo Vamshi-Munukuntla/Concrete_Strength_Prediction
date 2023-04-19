@@ -52,8 +52,8 @@ NUMERICAL_COLUMN_KEY = "Numerical_columns"
 TRANSFORM_COLUMN_KEY = "Transformation_columns"
 
 # Model Trainer Related Variable
-MODEL_TRAINER_ARTIFACT_DIR = "model_trainer"
 MODEL_TRAINER_CONFIG_KEY = "model_trainer_config"
+MODEL_TRAINER_ARTIFACT_DIR = "model_trainer"
 MODEL_TRAINER_TRAINED_MODEL_DIR_KEY = "trained_model_dir"
 MODEL_TRAINER_TRAINED_MODEL_FILE_NAME_KEY = "model_file_name"
 MODEL_TRAINER_BASE_R2_SCORE_KEY = "base_r2_score"

@@ -68,7 +68,7 @@ class DataTransformation:
             lower_limit = percentile25 - (1.5 * iqr)
 
             df.loc[(df[col] > upper_limit), col] = upper_limit
-            df.loc[(df[col] < upper_limit), col] = lower_limit
+            df.loc[(df[col] < lower_limit), col] = lower_limit
 
             logging.info('Outliers are capped by upper and lower limits.')
             return df

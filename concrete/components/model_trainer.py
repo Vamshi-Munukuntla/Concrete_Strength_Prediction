@@ -76,7 +76,7 @@ class ModelTrainer:
                                                                         X_test=X_test,
                                                                         y_test=y_test,
                                                                         base_r2_score=base_r2_score)
-
+            print(metric_info)
             print(metric_info.model_name)
             logging.info(f"Best found model on both training and testing dataset.")
 

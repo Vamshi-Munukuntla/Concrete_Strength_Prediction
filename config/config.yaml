@@ -25,6 +25,6 @@ model_trainer_config:
   model_file_name: model.pkl
   base_r2_score: 0.85
   model_config_dir: config
-  model_config_dir_name: model.yaml
+  model_config_file_name: model.yaml
 
 

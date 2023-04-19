@@ -6,27 +6,6 @@ grid_search:
     verbose: 5
 model_selection:
   module_0:
-    class: RandomForestRegressor
-    module: sklearn.ensemble
-    params:
-      criterion: 'squared_error'
-      max_depth: 20.0
-      n_estimators: 100
-    search_param_grid:
-      n_estimators:
-        - 100
-        - 500
-        - 1000
-      max_depth:
-        - 12
-        - 16
-        - 20
-        - 24
-      criterion:
-        - "squared_error"
-        - "absolute_error"
-        - "poisson"
-  module_1:
     class: XGBRegressor
     module: xgboost
     params:
@@ -46,3 +25,23 @@ model_selection:
         - 600
         - 800
         - 1000
+  module_1:
+    class: RandomForestRegressor
+    module: sklearn.ensemble
+    params:
+      criterion: 'squared_error'
+      max_depth: 20.0
+      n_estimators: 100
+    search_param_grid:
+      n_estimators:
+        - 100
+        - 500
+        - 1000
+      max_depth:
+        - 12
+        - 16
+        - 20
+        - 24
+      criterion:
+        - "squared_error"
+        - "absolute_error"
