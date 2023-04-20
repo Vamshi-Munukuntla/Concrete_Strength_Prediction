@@ -1,7 +1,0 @@
-best_model:
-  model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-20-03-54-19\trained_model\model.pkl
-history:
-  2023-04-20-03-51-35:
-    model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-20-03-23-21\trained_model\model.pkl
-  2023-04-20-03-54-19:
-    model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-20-03-51-35\trained_model\model.pkl

@@ -1,5 +1,5 @@
 import sys
-import os
+from warnings import filterwarnings
 
 import numpy as np
 from sklearn.compose import ColumnTransformer
@@ -12,7 +12,7 @@ from concrete.entity.config_entity import DataTransformationConfig
 from concrete.exception import CustomException
 from concrete.logger import logging
 from concrete.utils.utils import read_yaml_file, save_numpy_array_data, save_object, load_data
-from warnings import filterwarnings
+
 filterwarnings('ignore')
 
 
@@ -142,6 +142,11 @@ class DataTransformation:
 
             logging.info("Saving preprocessing object.")
             save_object(file_path=preprocessing_obj_file_path, obj=preprocessing_obj)
+            save_object(file_path=os.path.join(ROOT_DIR, DATA_TRANSFORMATION_PREPROCESSED_DIR_KEY,
+                                               os.path.basename(preprocessing_obj_file_path)), obj=preprocessing_obj)
+
+            print(train_arr)
+            print(test_arr)
 
             data_transformation_artifact = DataTransformationArtifact(
                 is_transformed=True,
