@@ -3,9 +3,12 @@ import sys
 from concrete.components.data_ingestion import DataIngestion
 from concrete.components.data_transformation import DataTransformation
 from concrete.components.data_validation import DataValidation
+from concrete.components.model_evaluation import ModelEvaluation
+from concrete.components.model_pusher import ModelPusher
 from concrete.components.model_trainer import ModelTrainer
 from concrete.config.configuration import Configuration
-from concrete.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact
+from concrete.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, \
+    ModelEvaluationArtifact, ModelPusherArtifact
 from concrete.entity.artifact_entity import DataValidationArtifact, ModelTrainerArtifact
 from concrete.exception import CustomException
 
@@ -56,6 +59,31 @@ class Pipeline:
         except Exception as e:
             raise CustomException(e, sys) from e
 
+    def start_model_evaluation(self,
+                               data_ingestion_artifact: DataIngestionArtifact,
+                               data_validation_artifact: DataValidationArtifact,
+                               model_trainer_artifact: ModelTrainerArtifact) -> ModelEvaluationArtifact:
+        try:
+            model_eval = ModelEvaluation(
+                model_evaluation_config=self.config.get_model_evaluation_config(),
+                data_ingestion_artifact=data_ingestion_artifact,
+                data_validation_artifact=data_validation_artifact,
+                model_trainer_artifact=model_trainer_artifact
+            )
+            return model_eval.initiate_model_evaluation()
+        except Exception as e:
+            raise CustomException(e, sys) from e
+
+    def start_model_pusher(self, model_eval_artifact: ModelEvaluationArtifact) -> ModelPusherArtifact:
+        try:
+            model_pusher = ModelPusher(
+                model_pusher_config=self.config.get_model_pusher_config(),
+                model_evaluation_artifact=model_eval_artifact
+            )
+            return model_pusher.initiate_model_pusher()
+        except Exception as e:
+            raise CustomException(e, sys) from e
+
     def run_pipeline(self):
         try:
             data_ingestion_artifact = self.start_data_ingestion()
@@ -64,8 +92,12 @@ class Pipeline:
                 data_ingestion_artifact=data_ingestion_artifact,
                 data_validation_artifact=data_validation_artifact
             )
-            self.start_model_trainer(
-                data_transformation_artifact=data_transformation_artifact
-            )
+            model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact
+                                                              )
+            model_evaluation_artifact = self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact,
+                                                                    data_validation_artifact=data_validation_artifact,
+                                                                    model_trainer_artifact=model_trainer_artifact)
+            model_pusher_artifact = self.start_model_pusher(model_eval_artifact=model_evaluation_artifact)
+            return model_pusher_artifact
         except Exception as e:
             raise CustomException(e, sys) from e

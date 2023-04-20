@@ -114,10 +114,10 @@ class ModelEvaluation:
             # dropping target column from the dataframe
             logging.info("Dropping target column from the dataframe.")
             train_dataframe.drop(target_column_name, axis=1, inplace=True)
-            train_arr = np.array(train_dataframe)
+            # train_arr = np.array(train_dataframe)
 
             test_dataframe.drop(target_column_name, axis=1, inplace=True)
-            test_arr = np.array(test_dataframe)
+            # test_arr = np.array(test_dataframe)
 
             logging.info("Dropping target column from the dataframe completed.")
 
@@ -136,9 +136,9 @@ class ModelEvaluation:
 
             metric_info_artifact = evaluate_regression_model(
                 model_list=model_list,
-                X_train=train_arr,
+                X_train=train_dataframe,
                 y_train=train_target_arr,
-                X_test=test_arr,
+                X_test=test_dataframe,
                 y_test=test_target_arr,
                 base_r2_score=self.model_trainer_artifact.test_r2_score
             )

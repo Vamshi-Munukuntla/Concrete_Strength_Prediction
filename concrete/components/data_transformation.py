@@ -70,7 +70,7 @@ class DataTransformation:
             df.loc[(df[col] > upper_limit), col] = upper_limit
             df.loc[(df[col] < lower_limit), col] = lower_limit
 
-            logging.info('Outliers are capped by upper and lower limits.')
+            logging.info(f'Outliers are capped by upper and lower limits for column {col}.')
             return df
 
         except Exception as e:
@@ -110,7 +110,6 @@ class DataTransformation:
             logging.info("Splitting input and target feature from training and testing dataframe.")
             input_feature_train_df = train_df.drop(columns=[target_column_name], axis=1)
             target_feature_train_df = train_df[target_column_name]
-            print(input_feature_train_df)
 
             input_feature_test_df = test_df.drop(columns=[target_column_name], axis=1)
             target_feature_test_df = test_df[target_column_name]
