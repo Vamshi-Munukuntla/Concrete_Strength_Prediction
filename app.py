@@ -3,38 +3,54 @@ import pickle
 import pandas as pd
 import streamlit as st
 
-model = pickle.load(open('saved_models/20230420035450/model.pkl', 'rb'))
+df = pd.read_csv('EDA_Files/Concrete_without_Outliers.csv')
 
-st.title('Concrete Compressive Strength Prediction')
+# preprocessor = pickle.load(open('preprocessed.pkl', 'rb'))
+# model = pickle.load(open('model.pkl', 'rb'))
 
-Cement = st.number_input('Please enter Cement value: ')
+with open('preprocessed.pkl', 'rb') as preprocessed_file:
+    preprocessed = pickle.load(preprocessed_file)
 
-Blast_Furnace_Slag = st.number_input('Please enter Blast_Furnace_Slag value: ')
+with open('model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
 
-Fly_Ash = st.number_input('Please enter Fly_Ash value: ')
+st.set_page_config(page_title="Concrete Compressive Strength Prediction", page_icon=":hammer_and_wrench:")
+st.title("Concrete Compressive Strength Prediction")
 
-Water = st.number_input('Please enter Water value: ')
+# Create input fields for user to input feature values
+Cement = st.slider("Cement (kg/m3)", min_value=float(df['Cement'].min()), max_value=df['Cement'].max())
+Blast_Furnace_Slag = st.slider("Blast_Furnace_Slag (kg/m3)", min_value=float(df['Furnace_Slag'].min()),
+                               max_value=df['Furnace_Slag'].max())
+Fly_Ash = st.slider("Fly_Ash (kg/m3)", min_value=float(df['Fly_Ash'].min()), max_value=df['Fly_Ash'].max())
+Water = st.slider("Water (kg/m3)", min_value=float(df['Water'].min()), max_value=df['Water'].max())
+Superplasticizer = st.slider("Superplasticizer (kg/m3)", min_value=float(df['Superplasticizer'].min()),
+                             max_value=df['Superplasticizer'].max())
+Coarse_Aggregate = st.slider("Coarse_Aggregate (kg/m3)", min_value=float(df['Coarse_Aggregate'].min()),
+                             max_value=df['Coarse_Aggregate'].max())
+Fine_Aggregate = st.slider("Fine_Aggregate (kg/m3)", min_value=float(df['Fine_Aggregate'].min()),
+                           max_value=df['Fine_Aggregate'].max())
+Age_in_days = st.slider("Age (days)", min_value=0, max_value=180, step=1)
 
-Superplasticizer = st.number_input('Please enter Superplasticizer value: ')
+input_data = {'Cement': Cement,
+              'Blast_Furnace_Slag': Blast_Furnace_Slag,
+              'Fly_Ash': Fly_Ash,
+              'Water': Water,
+              'Superplasticizer': Superplasticizer,
+              'Coarse_Aggregate': Coarse_Aggregate,
+              'Fine_Aggregate': Fine_Aggregate,
+              'Age_in_days': Age_in_days}
 
-Coarse_Aggregate = st.number_input('Please enter Coarse_Aggregate value: ')
 
-Fine_Aggregate = st.number_input('Please enter Fine_Aggregate value: ')
+df = pd.DataFrame([input_data])
+cols = df.columns
+st.dataframe(df)
 
-Age_in_days = st.number_input('Please enter Age_in_days value: ')
+# # Performing preprocessing steps on the new data.
+# preprocessed_data = pd.DataFrame(preprocessed.transform(df), columns=cols)
 
-
-inputs = {'cement': Cement,
-          'Blast_Furnace_Slag': Blast_Furnace_Slag,
-          'Fly_Ash': Fly_Ash, 'Water': Water,
-          'Superplasticizer': Superplasticizer,
-          'Coarse_Aggregate': Coarse_Aggregate,
-          'Fine_Aggregate': Fine_Aggregate,
-          'Age_in_days': Age_in_days}
-
-df = pd.DataFrame(inputs, index=[0])
-
+# Predicting the Compressive Strength of Concrete.
 y_pred = model.predict(df)
-st.write(y_pred)
-if st.button("Show Results"):
-    st.header(f"{round(y_pred, 2)}")
+
+
+if st.button('Show Results'):
+    st.header(f'{round(y_pred[0], 2)} MPa')

@@ -1,3 +1,4 @@
+import os.path
 import sys
 
 import dill
@@ -109,5 +110,14 @@ def load_object(file_path: str):
     try:
         with open(file_path, 'rb') as file_obj:
             return dill.load(file_obj)
+    except Exception as e:
+        raise CustomException(e, sys) from e
+
+
+def save_data(file_path: str, data: pd.DataFrame):
+    try:
+        dir_path = os.path.dirname(file_path)
+        os.makedirs(dir_path, exist_ok=True)
+        data.to_csv(file_path, index=False)
     except Exception as e:
         raise CustomException(e, sys) from e

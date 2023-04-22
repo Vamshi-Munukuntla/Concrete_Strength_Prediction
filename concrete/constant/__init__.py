@@ -51,6 +51,7 @@ DATASET_SCHEMA_COLUMNS_KEY = "ColumnNames"
 NUMERICAL_COLUMN_KEY = "Numerical_columns"
 TRANSFORM_COLUMN_KEY = "Transformation_columns"
 
+
 # Model Trainer Related Variable
 MODEL_TRAINER_CONFIG_KEY = "model_trainer_config"
 MODEL_TRAINER_ARTIFACT_DIR = "model_trainer"
@@ -72,3 +73,6 @@ MODEL_PATH_KEY = "model_path"
 # Model Pusher config key
 MODEL_PUSHER_CONFIG_KEY = "model_pusher_config"
 MODEL_PUSHER_MODEL_EXPORT_DIR_KEY = "model_export_dir"
+
+
+
