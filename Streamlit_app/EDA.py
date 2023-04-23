@@ -77,4 +77,4 @@ def EDA():
     image = Image.open('Streamlit_app/Images/EDA_6.png')
     st.image(image, use_column_width=True)
     st.write('**Few Insights:**')
-    st.write('There is no collinearity between the input feature.')
+    st.write('There is no collinearity between features.')

@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 
 def Problem_Statement():
@@ -46,3 +47,8 @@ def Problem_Statement():
     st.write("**Compressive strength** - Compressive strength of concrete refers to its ability to resist "
              "compression or withstand force applied to it in a perpendicular direction, and is an important "
              "factor in determining the durability and load-bearing capacity of concrete structures.")
+
+    st.subheader('Project Pipeline Architecture')
+    image = Image.open('Streamlit_app/Images/Project_Pipeline.png')
+    st.image(image, use_column_width=False)
+    st.write()
