@@ -3,15 +3,15 @@ import pickle
 import pandas as pd
 import streamlit as st
 
-df = pd.read_csv('EDA_Files/Concrete_without_Outliers.csv')
+df = pd.read_csv('../EDA_Files/Data/Concrete_without_Outliers.csv')
 
 # preprocessor = pickle.load(open('preprocessed.pkl', 'rb'))
 # model = pickle.load(open('model.pkl', 'rb'))
 
-with open('preprocessed.pkl', 'rb') as preprocessed_file:
+with open('../preprocessed.pkl', 'rb') as preprocessed_file:
     preprocessed = pickle.load(preprocessed_file)
 
-with open('model.pkl', 'rb') as model_file:
+with open('../model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
 st.set_page_config(page_title="Concrete Compressive Strength Prediction", page_icon=":hammer_and_wrench:")
@@ -45,8 +45,6 @@ df = pd.DataFrame([input_data])
 cols = df.columns
 st.dataframe(df)
 
-# # Performing preprocessing steps on the new data.
-# preprocessed_data = pd.DataFrame(preprocessed.transform(df), columns=cols)
 
 # Predicting the Compressive Strength of Concrete.
 y_pred = model.predict(df)

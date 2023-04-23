@@ -2,7 +2,6 @@ import os
 import sys
 from typing import List
 
-from concrete.constant import PICKLE_FOLDER_NAME_KEY, ROOT_DIR
 from concrete.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact
 from concrete.entity.config_entity import ModelTrainerConfig
 from concrete.entity.model_factory import MetricInfoArtifact, ModelFactory, GridSearchedBestModel
@@ -92,8 +91,6 @@ class ModelTrainer:
 
             logging.info(f"Saving model at path: {trained_model_file_path}")
             save_object(file_path=trained_model_file_path, obj=concrete_model)
-            save_object(file_path=os.path.join(ROOT_DIR, PICKLE_FOLDER_NAME_KEY,
-                                               os.path.basename(trained_model_file_path)), obj=concrete_model)
 
             model_trainer_artifact = ModelTrainerArtifact(is_trained=True,
                                                           message="Model Trained Successfully",
