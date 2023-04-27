@@ -16,26 +16,25 @@ def bulk_predict():
         if file is not None:
             st.success('File Uploaded Successfully.')
 
-            if os.path.isdir(folder):
-                shutil.rmtree(folder)
-            os.mkdir(folder)
-
-            with open(os.path.join(folder, file.name), 'wb') as f:
-                f.write(file.getbuffer())
-            st.success('File Saved Successfully.')
-
             pred = Batch_Prediction()
             output_file = pred.initiate_bulk_prediction()
-            path = os.path.basename(output_file)
-
+            st.markdown('First five rows of predicted data')
+            st.write(output_file.head())
             st.success("Prediction file generated.")
 
-            if st.button("Open File Location Path"):
-                if os.path.isdir(os.path.dirname(output_file)):
-                    os.system(f"open '{os.path.dirname(output_file)}'")
-                else:
-                    st.error(f"'{os.path.dirname(output_file)}' is not a valid directory")
-                return st.write(os.path.dirname(output_file))
+            @st.cache_data
+            def convert_df(data):
+                return data.to_csv(index=False)
+
+            csv_file = convert_df(output_file)
+
+            # Download the data
+            st.download_button(
+                label="Download Concrete Batch Predicted File",
+                data=csv_file,
+                file_name='Concrete_batch_predicted.csv',
+                mime='text/csv',
+            )
 
     except Exception as e:
         raise CustomException(e, sys) from e

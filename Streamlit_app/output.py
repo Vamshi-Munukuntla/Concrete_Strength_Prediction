@@ -1,5 +1,6 @@
 import pickle
 
+import numpy as np
 import pandas as pd
 import streamlit as st
 
@@ -7,22 +8,27 @@ import streamlit as st
 def app():
     df = pd.read_csv('EDA_Files/Data/Concrete_without_Outliers.csv')
 
-    with open('model.pkl', 'rb') as model_file:
+    with open('concrete_pickle/model.pkl', 'rb') as model_file:
         model = pickle.load(model_file)
 
     # Create input fields for user to input feature values
-    Cement = st.slider("Cement (kg/m3)", min_value=float(df['Cement'].min()), max_value=df['Cement'].max())
+    Cement = st.slider("Cement (kg/m3)", min_value=float(df['Cement'].min()), max_value=df['Cement'].max(),
+                       value=320.00)
+
     Blast_Furnace_Slag = st.slider("Blast_Furnace_Slag (kg/m3)", min_value=float(df['Furnace_Slag'].min()),
-                                   max_value=df['Furnace_Slag'].max())
-    Fly_Ash = st.slider("Fly_Ash (kg/m3)", min_value=float(df['Fly_Ash'].min()), max_value=df['Fly_Ash'].max())
-    Water = st.slider("Water (kg/m3)", min_value=float(df['Water'].min()), max_value=df['Water'].max())
+                                   max_value=df['Furnace_Slag'].max(), value=160.0)
+
+    Fly_Ash = st.slider("Fly_Ash (kg/m3)", min_value=float(df['Fly_Ash'].min()),
+                        max_value=df['Fly_Ash'].max(), value=10.0)
+
+    Water = st.slider("Water (kg/m3)", min_value=float(df['Water'].min()), max_value=df['Water'].max(), value=165.35)
     Superplasticizer = st.slider("Superplasticizer (kg/m3)", min_value=float(df['Superplasticizer'].min()),
-                                 max_value=df['Superplasticizer'].max())
+                                 max_value=df['Superplasticizer'].max(), value=3.0)
     Coarse_Aggregate = st.slider("Coarse_Aggregate (kg/m3)", min_value=float(df['Coarse_Aggregate'].min()),
-                                 max_value=df['Coarse_Aggregate'].max())
+                                 max_value=df['Coarse_Aggregate'].max(), value=976.0)
     Fine_Aggregate = st.slider("Fine_Aggregate (kg/m3)", min_value=float(df['Fine_Aggregate'].min()),
-                               max_value=df['Fine_Aggregate'].max())
-    Age_in_days = st.slider("Age (days)", min_value=0, max_value=180, step=1)
+                               max_value=df['Fine_Aggregate'].max(), value=720.00)
+    Age_in_days = st.slider("Age (days)", min_value=0, max_value=180, step=1, value=90)
 
     input_data = {'Cement': Cement,
                   'Blast_Furnace_Slag': Blast_Furnace_Slag,

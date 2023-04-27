@@ -1,7 +1,6 @@
 import collections
 import sys
 
-import numpy as np
 import pandas as pd
 
 from concrete.exception import CustomException

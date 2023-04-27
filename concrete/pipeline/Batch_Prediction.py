@@ -1,15 +1,15 @@
+import os
+import shutil
+import sys
+
+import pandas as pd
+
 from concrete.components.data_validation import Batch_Data_Validation
 from concrete.config.configuration import Configuration
-from concrete.logger import logging
-from concrete.exception import CustomException
 from concrete.constant import *
+from concrete.exception import CustomException
+from concrete.logger import logging
 from concrete.utils.utils import load_object, read_yaml_file, save_data
-
-import os
-import sys
-import pandas as pd
-import numpy as np
-import shutil
 
 
 class Batch_Prediction:
@@ -50,6 +50,8 @@ class Batch_Prediction:
             if data_validation_status:
                 # Reading uploaded .CSV file in pandas
                 data_df = pd.read_csv(self.path)
+                data_df.drop(columns='Concrete_Strength', inplace=True)
+                data_df['Compressive_Strength'] = 0
 
                 data_df.drop_duplicates(inplace=True)
                 logging.info('Duplicated data values are dropped from the dataset.')
@@ -59,22 +61,7 @@ class Batch_Prediction:
                 data_df['Compressive_Strength'] = prediction
                 logging.info('Prediction from model done')
 
-                logging.info("Saving prediction file for sending it to the user.")
-
-                output_folder_file_path = os.path.join(ROOT_DIR, "Output Folder", CURRENT_TIME_STAMP, "Predicted.csv")
-                if os.path.exists(os.path.join(ROOT_DIR, "Output Folder")):
-                    shutil.rmtree(os.path.join(ROOT_DIR, "Output Folder"))
-
-                save_data(file_path=output_folder_file_path, data=data_df)
-                zipped_file = os.path.dirname(output_folder_file_path)
-
-                shutil.make_archive(zipped_file, 'zip', zipped_file)
-                shutil.rmtree(zipped_file)
-                shutil.rmtree(self.folder)
-
-                logging.info(f"{'*' * 20} Bulk Prediction Completed {'*' * 20}")
-                return zipped_file + '.zip'
-
+                return data_df
         except Exception as e:
             raise CustomException(e, sys) from e
 

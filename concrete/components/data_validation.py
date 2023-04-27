@@ -20,19 +20,6 @@ class Batch_Data_Validation:
         except Exception as e:
             raise CustomException(e, sys) from e
 
-    def file_name_check(self, file):
-        try:
-            file_check_status = False
-            file_name = 'Concrete_Data.csv'
-            if file == file_name:
-                file_check_status = True
-            else:
-                raise Exception(f"File name is not as per the Schema in file: [{file}")
-
-            return file_check_status
-        except Exception as e:
-            raise CustomException(e, sys) from e
-
     def column_check(self, file):
         try:
             data = pd.read_csv(file)
@@ -70,7 +57,8 @@ class Batch_Data_Validation:
             logging.info("Validating the schema of the dataset")
             validation_status = False
 
-            if self.file_name_check(os.path.basename(self.path)) and self.column_check(os.path.join(self.path)):
+            # if self.file_name_check(os.path.basename(self.path)) and self.column_check(os.path.join(self.path)):
+            if self.column_check(os.path.join(self.path)):
                 validation_status = True
 
             logging.info('Schema Validation Completed')

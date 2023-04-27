@@ -11,7 +11,6 @@ ColumnNames:
   Age_in_days: int
   Concrete_Strength: float
 
-
 Numerical_columns:
   - Blast_Furnace_Slag
   - Water

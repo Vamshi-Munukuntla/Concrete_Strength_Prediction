@@ -1,5 +1,5 @@
 best_model:
-  model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-26-23-39-44\trained_model\model.pkl
+  model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-27-17-49-58\trained_model\model.pkl
 history:
   2023-04-23-07-28-00:
     model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-20-22-48-00\trained_model\model.pkl
@@ -7,3 +7,5 @@ history:
     model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-23-07-28-00\trained_model\model.pkl
   2023-04-26-23-39-44:
     model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-23-08-30-01\trained_model\model.pkl
+  2023-04-27-17-49-58:
+    model_path: D:\DS_Live_Class\Concrete_Strength_Prediction\concrete_strength\artifact\model_trainer\2023-04-26-23-39-44\trained_model\model.pkl
