@@ -8,6 +8,23 @@ from concrete.constant import *
 import sys
 
 
+import streamlit as st
+import os
+import shutil
+
+# Create a function to handle the file upload
+# def upload_csv():
+#     uploaded_file = st.file_uploader("Choose a CSV file", type="csv", key="csv_upload")
+#
+#     if uploaded_file is not None:
+#         # Save the uploaded file to a temporary location
+#         with open(os.path.join("temp", uploaded_file.name), "wb") as f:
+#             f.write(uploaded_file.getbuffer())
+#
+#         # Move the uploaded file to the desired location
+#         shutil.move(os.path.join("temp", uploaded_file.name), os.path.join("uploads", uploaded_file.name))
+
+
 def bulk_predict():
     try:
         file = st.file_uploader("Choose a file")
@@ -15,6 +32,13 @@ def bulk_predict():
 
         if file is not None:
             st.success('File Uploaded Successfully.')
+
+            if os.path.isdir(folder):
+                shutil.rmtree(folder)
+            os.mkdir(folder)
+
+            with open(os.path.join(folder, file.name), 'wb') as f:
+                f.write(file.getbuffer())
 
             pred = Batch_Prediction()
             output_file = pred.initiate_bulk_prediction()
