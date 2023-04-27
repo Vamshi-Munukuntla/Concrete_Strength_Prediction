@@ -7,12 +7,6 @@ import streamlit as st
 def app():
     df = pd.read_csv('EDA_Files/Data/Concrete_without_Outliers.csv')
 
-    # preprocessor = pickle.load(open('preprocessed.pkl', 'rb'))
-    # model = pickle.load(open('model.pkl', 'rb'))
-
-    with open('preprocessed.pkl', 'rb') as preprocessed_file:
-        preprocessed = pickle.load(preprocessed_file)
-
     with open('model.pkl', 'rb') as model_file:
         model = pickle.load(model_file)
 
@@ -39,8 +33,8 @@ def app():
                   'Fine_Aggregate': Fine_Aggregate,
                   'Age_in_days': Age_in_days}
 
-    st.subheader('Reference Data: ')
-    st.dataframe(df.sample(5, random_state=0))
+    # st.subheader('Reference Data: ')
+    # st.dataframe(df.sample(5, random_state=0))
 
     df = pd.DataFrame([input_data])
     cols = df.columns

@@ -51,6 +51,7 @@ DATASET_SCHEMA_COLUMNS_KEY = "ColumnNames"
 NUMERICAL_COLUMN_KEY = "Numerical_columns"
 TRANSFORM_COLUMN_KEY = "Transformation_columns"
 
+PICKLE_FOLDER_NAME_KEY = 'concrete_pickle'
 
 # Model Trainer Related Variable
 MODEL_TRAINER_CONFIG_KEY = "model_trainer_config"
@@ -74,5 +75,5 @@ MODEL_PATH_KEY = "model_path"
 MODEL_PUSHER_CONFIG_KEY = "model_pusher_config"
 MODEL_PUSHER_MODEL_EXPORT_DIR_KEY = "model_export_dir"
 
-
-
+# Prediction Related Variables
+PREDICTION_DATA_SAVING_FOLDER_KEY = "Prediction_Batch_Files"
