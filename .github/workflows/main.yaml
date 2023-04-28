@@ -2,23 +2,28 @@ name: Concrete_Strength_Prediction
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
-jobs:
-  run_streamlit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  permissions:
+    contents: read
 
-      - name: Setup Python
-        uses: actions/setup-python@v2
+  jobs:
+    build:
+
+      runs-on: ${{ matrix.os}}
+      strategy:
+        matrix:
+          os: [ubuntu-latest, windows-latest]
+          python-version: ["3.7"]
+
+      steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python#v3
         with:
-          python-version: "3.7"
-
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run Concrete_Strength_Prediction
-        run: streamlit run main.py
+        run:
+          pip install -r requirements.txt
