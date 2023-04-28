@@ -25,7 +25,7 @@ import shutil
 #         shutil.move(os.path.join("temp", uploaded_file.name), os.path.join("uploads", uploaded_file.name))
 
 
-def bulk_predict():
+def batch_predict():
     try:
         file = st.file_uploader("Choose a file")
         folder = PREDICTION_DATA_SAVING_FOLDER_KEY

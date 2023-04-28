@@ -5,7 +5,7 @@ from Streamlit_app.Problem_Statement import Problem_Statement
 from Streamlit_app.output import app
 from Streamlit_app.Preprocessing import Preprocessing
 from Streamlit_app.Model_Building import model_building
-from Streamlit_app.Bulk_predict import bulk_predict
+from Streamlit_app.Batch_predict import batch_predict
 
 st.set_page_config(page_title="Concrete Compressive Strength Prediction",
                    page_icon=":hammer_and_wrench:", layout="wide")
@@ -14,7 +14,7 @@ st.title("Concrete Compressive Strength Prediction")
 
 def main():
     activities = ['Problem Statement', 'EDA', 'Feature Engineering',
-                  "Model Building", 'Single Prediction', "Bulk Prediction"]
+                  "Model Building", 'Single Prediction', "Batch Prediction"]
     option = st.sidebar.radio('Selection Option: ', activities)
 
     st.sidebar.markdown("Github Repository: "
@@ -36,8 +36,8 @@ def main():
     elif option == 'Single Prediction':
         app()
 
-    elif option == "Bulk Prediction":
-        bulk_predict()
+    elif option == "Batch Prediction":
+        batch_predict()
 
     # Display the PDF file
 
